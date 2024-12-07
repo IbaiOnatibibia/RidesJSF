@@ -1,38 +1,37 @@
 package eredua.bean;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import businessLogic.BLFacade;
 import domain.Ride;
 
-@ManagedBean(name = "QueryRides")
+@ManagedBean(name = "queryRides")
 @RequestScoped
 public class QueryRidesBean {
 
 	BLFacade facadeBL = FacadeBean.getBusinessLogic();
-	private String nondik;
-	private List<String> AbiapuntuaList;
-	private String nora;
-	private List<String> HelmugaList;
-	private Date data;
-	private List<Ride> rides;
+	private List<String> abiapuntuaList = new ArrayList<>();
+	private String nondik="";
+	private String nora = "";
+	private List<String> helmugaList =new ArrayList<>();;
+	private Date data = new Date();
+	private List<Ride> rides= new ArrayList<>();;
 
 	public QueryRidesBean() {
-		AbiapuntuaList = facadeBL.getDepartCities();
-		HelmugaList = new ArrayList<>();
-		rides= new ArrayList<>();
+		
 	}
-	
+
 	public void setRides(List<Ride> rides) {
 		this.rides = rides;
 	}
-	
+
 	public List<Ride> getRides() {
 		return rides;
 	}
@@ -61,35 +60,35 @@ public class QueryRidesBean {
 		this.nora = nora;
 	}
 
-    public List<String> getAbiapuntuaList() {
-        return this.AbiapuntuaList;
-    }
-   
-	public void setAbiapuntuaList(List<String> abiapuntuaList) {
-		this.AbiapuntuaList = abiapuntuaList;
+	public List<String> getAbiapuntuaList() {
+		return  facadeBL.getDepartCities();
 	}
-	
 
-    public List<String> getHelmugaList() {
-        if (nondik == null || nondik.isEmpty()) 
-            return new ArrayList<>(); 
-            
-        return facadeBL.getDestinationCities(nondik);
-    }
+	public void setAbiapuntuaList(List<String> abiapuntuaList) {
+		this.abiapuntuaList = abiapuntuaList;
+	}
 
-    public void setHelmugaList(List<String> helmugaList) {
-        this.HelmugaList = helmugaList;
-    }
-    	
+	public List<String> getHelmugaList() {
+		if(nondik!=null && !nondik.isEmpty()) {
+			return facadeBL.getDestinationCities(nondik);
+		}
+		return new ArrayList<>();
+	}
+
+
+	public void setHelmugaList(List<String> helmugaList) {
+		this.helmugaList = helmugaList;
+	}
 
 	public String bilatu() {
-		if (nondik != null && nora != null && data != null) {	
-            rides = facadeBL.getRides(nondik, nora, data);
-            return null;
-        } else {
-            rides = new ArrayList<>(); 
-            return null;
-        }
+		System.out.println("abe");
+		if (nondik != null && nora != null && data != null) {
+			rides = facadeBL.getRides(nondik, nora, data);
+			return "";
+		} else {
+			rides = new ArrayList<>();
+			return "";
+		}
 	}
 
 }

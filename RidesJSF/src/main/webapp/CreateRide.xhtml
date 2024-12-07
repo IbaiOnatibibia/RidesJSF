@@ -10,28 +10,29 @@ xmlns:p="http://primefaces.org/ui">
     <title>Bidaiak sortzeko orria</title>
 </h:head>
 <h:body>
+<h:form>
   <h:outputText value="Nondik:" />
-<h:inputText id="nondik" value="#{CreateRide.nondik}" />
+<h:inputText id="nondik" value="#{createRide.nondik}" />
 <br/> <br/>
 
 <h:outputText value="Nora:" />
-<h:inputText id="nora" value="#{CreateRide.nora}" /> 
+<h:inputText id="nora" value="#{createRide.nora}" /> 
 <br/> <br/>
 
 <h:outputText value="Prezioa:" />
-<h:inputText id="prezioa" value="#{CreateRide.prezioa}" /> 
+<h:inputText id="prezioa" value="#{createRide.prezioa}" /> 
 <br/> <br/>
 
 <h:outputText value="Eserlekuak:" />
-<h:inputText id="eserlekuak" value="#{CreateRide.eserlekuak}" /> 
+<h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" /> 
 <br/> <br/>
 
   <br/><br/>
-  <p:calendar id="data" value="#{CreateRide.data}" navigator="false" mode="inline" ajax='true'>
-  </p:calendar>
+  <p:calendar id="data" value="#{createRide.data}" navigator="false" mode="inline" ajax='true'/>
   <br/><br/>
-   <h:commandButton value ="Sortu" action="#{CreateRide.createRide}"/>
+   <h:commandButton value ="Sortu" action="#{createRide.createRide}"/>
+   <h:messages id="messages" globalOnly="true" style="color: red;" />
    
-   
+  </h:form>
 </h:body>
 </html>

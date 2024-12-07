@@ -1,56 +1,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Bidaiak bilatzeko orria</title>
+	<title>Bidaiak bilatzeko orria</title>
 </h:head>
 
 <h:body>
-  <h:form>
-	<h:outputText value="Nondik:" />   
-	<h:selectOneMenu id="nondik" value="#{QueryRides.nondik}">
-   <f:selectItems value="#{QueryRides.abiapuntuaList}"/>
- 	  <f:ajax event="change" execute="@this" render="nora" />
-   </h:selectOneMenu>
-   
-   <br /><br />
-   
-   <h:outputText value="Nora:" />
-    <h:selectOneMenu id ="nora" value="#{QueryRides.nora}">
-        <f:selectItems value="#{QueryRides.helmugaList}" />
-    </h:selectOneMenu>
-    <br/><br/>
-    <p:calendar id="data" value="#{QueryRides.data}" navigator="false" mode="inline" ajax='true'>
-	</p:calendar>
-    
-    <br/><br/>
-    
-    <h:commandButton value ="Bilatu" action="#{QueryRides.bilatu}" update="Bidaitaula"/>
-    
-    <h:dataTable id="Bidaitaula" value="#{QueryRides.rides}" var="ride" border="1">
-        <h:column>
-            <f:facet name="header">Nondik</f:facet>
-            #{nondik}
+	<h:form>
+		<h:outputText value="Nondik:" />
+		<h:selectOneMenu id="nondik" value="#{queryRides.nondik}">
+		<f:selectItem itemLabel="Aukeratu hiri bat" itemValue=""/>
+			<f:selectItems value="#{queryRides.abiapuntuaList}" />
+			<p:ajax update="nora" />
+		</h:selectOneMenu>
+
+		<br />
+		<br />
+
+		<h:outputText value="Nora:" />
+		<h:selectOneMenu id="nora" value="#{queryRides.nora}">
+			<f:selectItem itemLabel="Aukeratu hiri bat" itemValue=""/>
+			<f:selectItems value="#{queryRides.helmugaList}" />
+		</h:selectOneMenu>
+		<br />
+		<br />
+		<p:calendar id="data" value="#{queryRides.data}" navigator="false"
+			mode="inline" ajax='true'/>
+		
+		<br />
+		<br />
+
+		<h:commandButton value="Bilatu" action="#{queryRides.bilatu}"
+			update="Bidaitaula" />
+
+		<td><p:dataTable id="Bidaitaula" value="#{queryRides.rides}"
+				var="ride" border="1">
+				<f:facet name="header">Bidaiak: </f:facet>
+				<h:column>
+					<f:facet name="header">Nondik</f:facet>
+            #{ride.from}
         </h:column>
-        <h:column>
-            <f:facet name="header">Nora</f:facet>
-            #{nora}
+				<h:column>
+					<f:facet name="header">Nora</f:facet>
+            #{ride.to}
         </h:column>
-        <h:column>
-            <f:facet name="header">Data</f:facet>
-            #{ride.data}
+				<h:column>
+					<f:facet name="header">Data</f:facet>
+            #{ride.date}
         </h:column>
-        <h:column>
-            <f:facet name="header">Prezioa</f:facet>
+				<h:column>
+					<f:facet name="header">Prezioa</f:facet>
             #{ride.price}
         </h:column>
-    </h:dataTable>
-       
-  </h:form>
+			</p:dataTable></td>
+		<h:messages id="errorea" globalOnly="true" showDetail="true" showSummary="true" />
+
+	</h:form>
 </h:body>
 </html>

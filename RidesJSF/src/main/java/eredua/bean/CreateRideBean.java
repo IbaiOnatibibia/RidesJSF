@@ -1,15 +1,17 @@
 package eredua.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import businessLogic.BLFacade;
 import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
-@ManagedBean(name = "CreateRide")
+@ManagedBean(name = "createRide")
 @RequestScoped
 public class CreateRideBean {
 
@@ -56,18 +58,24 @@ public class CreateRideBean {
 		this.eserlekuak = eserlekuak;
 	}
 	
-	public String  createRide() {
-		if(nondik!=null && nora!=null && data!=null && eserlekuak>0) {
-			try {
-				facadeBL.createRide(nondik, nora, data, eserlekuak, prezioa,"driver1@gmail.com");
-				System.out.println("Viaje creado");
-			} catch (RideMustBeLaterThanTodayException | RideAlreadyExistException e) {
-				
-				e.printStackTrace();
-				System.out.println("Error al intenetar crear el viaje");
-			}
-		}
-		return null;
+	public String createRide() {
+		
+	    if (nondik != null && nora != null && data != null && eserlekuak > 0) {
+	        try {
+	            facadeBL.createRide(nondik, nora, data, eserlekuak, prezioa, "driver1@gmail.com");
+	            FacesContext.getCurrentInstance().addMessage(null, 
+	                new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da", null));
+	            return ""; 
+	        } catch (RideMustBeLaterThanTodayException | RideAlreadyExistException e) {
+	            FacesContext.getCurrentInstance().addMessage(null, 
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Errore bat gertatu da: " + e.getMessage(), null));
+	            e.printStackTrace();
+	        }
+	    } else {
+	        FacesContext.getCurrentInstance().addMessage(null, 
+	            new FacesMessage(FacesMessage.SEVERITY_WARN, "Utsune guztiak bete behar dira.", null));
+	    }
+	    return null;
 	}
 
 	public int getPrezioa() {

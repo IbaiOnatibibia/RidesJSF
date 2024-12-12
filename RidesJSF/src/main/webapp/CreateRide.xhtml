@@ -12,24 +12,29 @@ xmlns:p="http://primefaces.org/ui">
 <h:body>
 <h:form>
   <h:outputText value="Nondik:" />
-<h:inputText id="nondik" value="#{createRide.nondik}" />
+<h:inputText id="nondik" value="#{createRide.nondik}"  required="true"/>
+	<h:message for="nondik" />
 <br/> <br/>
 
 <h:outputText value="Nora:" />
-<h:inputText id="nora" value="#{createRide.nora}" /> 
+<h:inputText id="nora" value="#{createRide.nora}"  required="true"/>
+	<h:message for="nora"/>
 <br/> <br/>
 
 <h:outputText value="Prezioa:" />
 <h:inputText id="prezioa" value="#{createRide.prezioa}" /> 
+
 <br/> <br/>
 
 <h:outputText value="Eserlekuak:" />
 <h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" /> 
+
 <br/> <br/>
 
   <br/><br/>
   <p:calendar id="data" value="#{createRide.data}" navigator="false" mode="inline" ajax='true'/>
   <br/><br/>
+  
    <h:commandButton value ="Sortu" action="#{createRide.createRide}"/>
    <h:messages id="messages" globalOnly="true" style="color: red;" />
    

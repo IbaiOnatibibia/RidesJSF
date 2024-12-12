@@ -2,27 +2,29 @@ package eredua.bean;
 
 import java.util.ArrayList;
 
+
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import businessLogic.BLFacade;
 import domain.Ride;
 
 @ManagedBean(name = "queryRides")
-@RequestScoped
+@SessionScoped
 public class QueryRidesBean {
 
 	BLFacade facadeBL = FacadeBean.getBusinessLogic();
 	private List<String> abiapuntuaList = new ArrayList<>();
 	private String nondik="";
 	private String nora = "";
-	private List<String> helmugaList =new ArrayList<>();;
+	private List<String> helmugaList =new ArrayList<>();
 	private Date data = new Date();
-	private List<Ride> rides= new ArrayList<>();;
+	private List<Ride> rides= new ArrayList<>();
 
 	public QueryRidesBean() {
 		
@@ -72,6 +74,7 @@ public class QueryRidesBean {
 		if(nondik!=null && !nondik.isEmpty()) {
 			return facadeBL.getDestinationCities(nondik);
 		}
+
 		return new ArrayList<>();
 	}
 
@@ -81,7 +84,6 @@ public class QueryRidesBean {
 	}
 
 	public String bilatu() {
-		System.out.println("abe");
 		if (nondik != null && nora != null && data != null) {
 			rides = facadeBL.getRides(nondik, nora, data);
 			return "";

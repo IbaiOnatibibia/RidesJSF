@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import businessLogic.BLFacade;
@@ -12,13 +12,13 @@ import exceptions.RideAlreadyExistException;
 import exceptions.RideMustBeLaterThanTodayException;
 
 @ManagedBean(name = "createRide")
-@RequestScoped
+@SessionScoped
 public class CreateRideBean {
 
 	BLFacade facadeBL=FacadeBean.getBusinessLogic();
-	private String nondik;
-	private String nora;
-	private Date data;
+	private String nondik="";
+	private String nora="";
+	private Date data= new Date();
 	private int eserlekuak;
 	private int prezioa;
 	
@@ -59,22 +59,20 @@ public class CreateRideBean {
 	}
 	
 	public String createRide() {
-		
 	    if (nondik != null && nora != null && data != null && eserlekuak > 0) {
 	        try {
 	            facadeBL.createRide(nondik, nora, data, eserlekuak, prezioa, "driver1@gmail.com");
-	            FacesContext.getCurrentInstance().addMessage(null, 
-	                new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da", null));
+	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da.", "Bidaia sortua izan da.");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
 	            return ""; 
-	        } catch (RideMustBeLaterThanTodayException | RideAlreadyExistException e) {
-	            FacesContext.getCurrentInstance().addMessage(null, 
-	                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Errore bat gertatu da: " + e.getMessage(), null));
-	            e.printStackTrace();
+	        } catch (RideMustBeLaterThanTodayException | RideAlreadyExistException e) {	          
+	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, message);
 	        }
-	    } else {
-	        FacesContext.getCurrentInstance().addMessage(null, 
-	            new FacesMessage(FacesMessage.SEVERITY_WARN, "Utsune guztiak bete behar dira.", null));
-	    }
+	    } 
+	        
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Akatsa", "Bidaia ez da sortua izan.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
 	    return null;
 	}
 

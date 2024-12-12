@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Register</title>
+</h:head>
+<body>
+
+	<h:form>
+		<h2>Register</h2>
+
+		<h:outputLabel for="email" value="Email:" />
+		<h:inputText id="email" value="#{Register.email}" required="true" />
+		<h:message for="email" />
+		<br></br>
+		<h:outputLabel for="name" value="Izena:" />
+		<h:inputText id="name" value="#{Register.name}" required="true" />
+		<h:message for="name" />
+		<br></br>
+		<h:outputLabel for="password" value="Password:" />
+		<h:inputSecret id="password" value="#{Register.password}" required="true" />
+		<h:message for="password" />
+		<br></br>
+		<h:outputLabel for="confirmPassword" value="Confirm Password:" />
+		<h:inputSecret id="confirmPassword"	value="#{Register.confirmPassword}" required="true" />
+		<h:message for="confirmPassword"/>
+		<br></br>
+		<p:commandButton value="Register" action="#{Register.register}"
+			icon="pi pi-user-plus" />
+		 <h:messages id="messages" globalOnly="true" style="color: red;" />
+	</h:form>
+</body>
+</html>

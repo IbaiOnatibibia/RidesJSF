@@ -56,9 +56,8 @@ public class RegisterBean {
 
 	public String register() {
 		if (!password.equals(confirmPassword)) {
-	        FacesContext.getCurrentInstance().addMessage(null,
-	            new FacesMessage(FacesMessage.SEVERITY_ERROR,
-	                "Pasahitzak desberdinak dira.", "Errorea"));
+			 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pasahitza eta konfirmazioa ez dira berdinak", "Errorea.");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
 	    }
 		else {
 		if(email!=null && !email.isEmpty() && password!=null && !password.isEmpty() && confirmPassword!=null && !confirmPassword.isEmpty()) {
@@ -66,13 +65,13 @@ public class RegisterBean {
 				facadeBL.register(email, name, confirmPassword);
 				return "home";
 			} catch (UserAlreadyExistsException e) {
-				 FacesContext.getCurrentInstance().addMessage(null,
-				            new FacesMessage(FacesMessage.SEVERITY_ERROR,
-				                "Erabiltzailea dagoeneko existitzen da.", "Errorea"));
+				 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erabiltzailea existitzen da.", "Errorea.");
+		            FacesContext.getCurrentInstance().addMessage(null, message);
+
 			}
-		}else {
-			 new FacesMessage(FacesMessage.SEVERITY_WARN,
-		                "Utsune guztiak bete behar dira.", "Abisua");
+		}else {	
+			 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Utsune guzztiak bete behar dira", "Errorea.");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 		}
 	return "";

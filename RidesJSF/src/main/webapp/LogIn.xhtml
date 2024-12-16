@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Login</title>
+	<title>Login</title>	
 </h:head>
 
 <h:body>
@@ -15,11 +15,10 @@
 		<h2>Login</h2>
 
 		<h:outputLabel for="email" value="Email:" />
-		<h:inputText id="email" value="#{logIn.email}" required="true" />
-		<h:message for="email" />
+		<h:inputText id="email" value="#{logIn.email}" required="true" requiredMessage="Email-a beharrezkoa da."/>
 		<br></br>
 		<h:outputLabel for="password" value="Password:" />
-		<h:inputSecret id="password" value="#{logIn.password}" required="true" />
+		<h:inputSecret id="password" value="#{logIn.password}" required="true" requiredMessage="Pasahitza beharrezkoa da." />
 		<h:message for="password" />
 		<br></br>
 		<p:commandButton value="Login" action="#{logIn.login}"

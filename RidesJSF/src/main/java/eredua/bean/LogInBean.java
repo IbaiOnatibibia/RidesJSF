@@ -36,16 +36,14 @@ public class LogInBean {
 	    if (email != null && !email.isEmpty() && password != null && !password.isEmpty()) {
 	        User u = facadeBL.LogIn(email, password);
 	        if (u == null) {
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-	                "Errorea", "Erabiltzaile edo pasahitza okerra."));
+	        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erabiltzaile edo pasahitz okerra.", "Errorea");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
 	        } else {
-	            return "Mainpage";
+	            return "Mainpage?faces-redirect=true";
 	        }
 	    } else {
-	        FacesContext.getCurrentInstance().addMessage(null,
-	            new FacesMessage(FacesMessage.SEVERITY_WARN, 
-	            "Abisua", "Utsune guztiak bete behar dira."));
+	    	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Utsune guztiak bete behar dira.", "Errorea.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
 	    }
 	    return "";
 	}

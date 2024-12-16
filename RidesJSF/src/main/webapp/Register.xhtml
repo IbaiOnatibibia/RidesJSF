@@ -15,24 +15,25 @@
 		<h2>Register</h2>
 
 		<h:outputLabel for="email" value="Email:" />
-		<h:inputText id="email" value="#{Register.email}" required="true" />
-		<h:message for="email" />
+		<h:inputText id="email" value="#{Register.email}" />
+		<h:message for="email" style="color: red;"/>
 		<br></br>
 		<h:outputLabel for="name" value="Izena:" />
-		<h:inputText id="name" value="#{Register.name}" required="true" />
-		<h:message for="name" />
+		<h:inputText id="name" value="#{Register.name}"/>
+		<h:message for="name" style="color: red;" />
 		<br></br>
 		<h:outputLabel for="password" value="Password:" />
-		<h:inputSecret id="password" value="#{Register.password}" required="true" />
-		<h:message for="password" />
+		<h:inputSecret id="password" value="#{Register.password}" />
+		<h:message for="password" style="color: red;"/>
 		<br></br>
 		<h:outputLabel for="confirmPassword" value="Confirm Password:" />
-		<h:inputSecret id="confirmPassword"	value="#{Register.confirmPassword}" required="true" />
-		<h:message for="confirmPassword"/>
+		<h:inputSecret id="confirmPassword"	value="#{Register.confirmPassword}"  />
+		<h:message for="confirmPassword" style="color: red;"/>
 		<br></br>
 		<p:commandButton value="Register" action="#{Register.register}"
 			icon="pi pi-user-plus" />
-		 <h:messages id="messages" globalOnly="true" style="color: red;" />
+		<h:messages id="messages" globalOnly="true" style="color: red;" />
 	</h:form>
+
 </body>
 </html>

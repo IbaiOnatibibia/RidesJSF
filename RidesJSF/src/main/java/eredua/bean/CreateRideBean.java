@@ -72,13 +72,16 @@ public class CreateRideBean {
 	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da.", "Bidaia sortua izan da.");
 	            FacesContext.getCurrentInstance().addMessage(null, message);
 	            return ""; 
-	        } catch (RideMustBeLaterThanTodayException | RideAlreadyExistException e) {	          
-	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage());
+	        } catch (RideMustBeLaterThanTodayException e) {	          
+	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bidaia gaur baino beranduago izan behar da.", "Errorea");
+	            FacesContext.getCurrentInstance().addMessage(null, message);
+	         } catch ( RideAlreadyExistException e2) {	          
+	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Zure  bidaia existitzen da.", "Errorea");
 	            FacesContext.getCurrentInstance().addMessage(null, message);
 	        }
 	    } 
 	        
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Akatsa", "Bidaia ez da sortua izan.");
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia ez da sortua izan.", "Akatsa");
         FacesContext.getCurrentInstance().addMessage(null, message);
 	    return null;
 	}

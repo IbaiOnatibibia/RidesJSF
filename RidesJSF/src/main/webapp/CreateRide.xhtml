@@ -12,17 +12,17 @@ xmlns:p="http://primefaces.org/ui">
 <h:body>
 <h:form>
   <h:outputText value="Nondik:" />
-<h:inputText id="nondik" value="#{createRide.nondik}"  required="true"/>
-	<h:message for="nondik" />
+<h:inputText id="nondik" value="#{createRide.nondik}"  required="true" requiredMessage="Nondik balioa beharrezkoa da."/>
+<h:message for="nondik" />
 <br/> <br/>
 
 <h:outputText value="Nora:" />
-<h:inputText id="nora" value="#{createRide.nora}"  required="true"/>
+<h:inputText id="nora" value="#{createRide.nora}" required="true" requiredMessage="Nora balioa beharrezkoa da."/>
 	<h:message for="nora"/>
 <br/> <br/>
 
 <h:outputText value="Prezioa:" />
-<h:inputText id="prezioa" value="#{createRide.prezioa}" >
+<h:inputText id="prezioa" value="#{createRide.prezioa}" required="true" requiredMessage="Prezioa jarri behar da beharrezkoa da." >
     <f:validateLongRange minimum="1" />
 </h:inputText> 
 <h:message for="prezioa"/>
@@ -30,7 +30,7 @@ xmlns:p="http://primefaces.org/ui">
 <br/> <br/>
 
 <h:outputText value="Eserlekuak:" />
-<h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" > 
+<h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" required="true" requiredMessage="Eserleku kopurua beharrezkoa da."> 
  <f:validateLongRange minimum="1" />
 </h:inputText> 
 <h:message for="eserlekuak"/>

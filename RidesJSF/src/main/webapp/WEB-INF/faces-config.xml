@@ -58,6 +58,46 @@
 			<to-view-id>/home.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>SelectOne.xhtml</display-name>
+		<from-view-id>/SelectOne.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>viewRides</from-outcome>
+			<to-view-id>/ViewRides.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>Mainpage.xhtml</display-name>
+		<from-view-id>/Mainpage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>selectOne</from-outcome>
+			<to-view-id>/SelectOne.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>QueryRides.xhtml</display-name>
+		<from-view-id>/QueryRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Mainpage</from-outcome>
+			<to-view-id>/Mainpage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>CreateRide.xhtml</display-name>
+		<from-view-id>/CreateRide.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Mainpage</from-outcome>
+			<to-view-id>/Mainpage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>ViewRides.xhtml</display-name>
+		<from-view-id>/ViewRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Mainpage</from-outcome>
+			<to-view-id>/Mainpage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 
 </faces-config>

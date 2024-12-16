@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Rides aplikazioaren sarrera</title>
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<h:outputText value="Erabiltzaile hautatua: #{selectOne.user}" />
+
+		<p:dataTable id="UserRides" value="#{selectOne.rideList}" var="ride"
+			responsiveLayout="scroll" style="width: 100%;">
+			<p:column headerText="DEPART CITY">
+				<h:outputText value="#{ride.origin}" />
+			</p:column>
+			<p:column headerText="ARRIVAL CITY">
+				<h:outputText value="#{ride.destination}" />
+			</p:column>
+			<p:column headerText="RIDE DATE">
+				<h:outputText value="#{ride.date}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="PRICE">
+				<h:outputText value="#{ride.price}">
+					<f:convertNumber pattern="#" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+		<br>
+		</br>
+		<h:commandButton value="Itzuli" action="Mainpage" style="width:100px; height:25px;"/>
+	</h:form>
+</h:body>
+</html>

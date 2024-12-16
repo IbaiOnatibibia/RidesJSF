@@ -22,12 +22,19 @@ xmlns:p="http://primefaces.org/ui">
 <br/> <br/>
 
 <h:outputText value="Prezioa:" />
-<h:inputText id="prezioa" value="#{createRide.prezioa}" /> 
+<h:inputText id="prezioa" value="#{createRide.prezioa}" >
+    <f:validateLongRange minimum="1" />
+</h:inputText> 
+<h:message for="prezioa"/>
 
 <br/> <br/>
 
 <h:outputText value="Eserlekuak:" />
-<h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" /> 
+<h:inputText id="eserlekuak" value="#{createRide.eserlekuak}" > 
+ <f:validateLongRange minimum="1" />
+</h:inputText> 
+<h:message for="eserlekuak"/>
+
 
 <br/> <br/>
 
@@ -37,7 +44,10 @@ xmlns:p="http://primefaces.org/ui">
   
    <h:commandButton value ="Sortu" action="#{createRide.createRide}"/>
    <h:messages id="messages" globalOnly="true" style="color: red;" />
-   
+  </h:form>
+  <h:form>
+   <br></br>
+   	<h:commandButton value="Itzuli" action="Mainpage" inmediate ="true" style="width:100px; height:25px;"/>
   </h:form>
 </h:body>
 </html>

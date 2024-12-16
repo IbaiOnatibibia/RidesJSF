@@ -81,4 +81,7 @@ public interface BLFacade  {
 	 
 	 public boolean register(String email, String name, String password) throws UserAlreadyExistsException;
 	
+	 public List<String> getUsers();
+	 
+	public List<Ride> getRides(String email);
 }

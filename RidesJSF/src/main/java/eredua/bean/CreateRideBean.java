@@ -15,6 +15,7 @@ import exceptions.RideMustBeLaterThanTodayException;
 @SessionScoped
 public class CreateRideBean {
 
+	private LogInBean logInBean;
 	BLFacade facadeBL=FacadeBean.getBusinessLogic();
 	private String nondik="";
 	private String nora="";
@@ -23,7 +24,13 @@ public class CreateRideBean {
 	private int prezioa;
 	
 	public CreateRideBean() {
-		
+		logInBean = (LogInBean) FacesContext.getCurrentInstance()
+        .getExternalContext()
+        .getSessionMap()
+        .get("logIn");
+		if (logInBean == null) {
+	        throw new IllegalStateException("LogInBean ez dago inizializatua");
+	    }
 	}
 
 	public String getNondik() {
@@ -61,7 +68,7 @@ public class CreateRideBean {
 	public String createRide() {
 	    if (nondik != null && nora != null && data != null && eserlekuak > 0) {
 	        try {
-	            facadeBL.createRide(nondik, nora, data, eserlekuak, prezioa, "driver1@gmail.com");
+	            facadeBL.createRide(nondik, nora, data, eserlekuak, prezioa, logInBean.getEmail());
 	            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bidaia sortu da.", "Bidaia sortua izan da.");
 	            FacesContext.getCurrentInstance().addMessage(null, message);
 	            return ""; 

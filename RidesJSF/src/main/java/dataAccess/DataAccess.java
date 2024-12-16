@@ -37,7 +37,7 @@ public class DataAccess {
 
 	public DataAccess() {
 
-			initializeDB();
+		initializeDB();
 
 	}
 
@@ -195,7 +195,8 @@ public class DataAccess {
 		System.out.println(">> DataAccess: getRides=> from= " + origin + " to= " + destination + " date " + date);
 
 		List<Ride> res = new ArrayList<>();
-		Query query = session.createQuery("FROM Ride  WHERE origin= :origin AND destination= :destination AND date= :date");
+		Query query = session
+				.createQuery("FROM Ride  WHERE origin= :origin AND destination= :destination AND date= :date");
 		System.out.println(query);
 		query.setParameter("origin", origin);
 		query.setParameter("destination", destination);
@@ -264,33 +265,63 @@ public class DataAccess {
 	}
 
 	public boolean register(String email, String name, String password) throws UserAlreadyExistsException {
-	    boolean userExists = false;
-	    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	    
-	    try {
-	        session.beginTransaction();
-	        
-	        Query query = session.createQuery("FROM User u WHERE u.email = :email");
-	        query.setParameter("email", email);
-	        
-	        userExists = query.list().isEmpty();
-	        
-	        if (userExists) {
-	              List<Ride> rides = new ArrayList<>();
-	              User user = new User(email, name, password, rides);
-	              session.persist(user);	            
-	        } else {
-	        	session.getTransaction().rollback();
-	            throw new UserAlreadyExistsException();
-	        }
+		boolean userExists = false;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-	        session.getTransaction().commit();
-	    }catch(	Exception e){
-	            session.getTransaction().rollback();
-	        e.printStackTrace();
-	    }
+		try {
+			session.beginTransaction();
 
-	    return userExists;
+			Query query = session.createQuery("FROM User u WHERE u.email = :email");
+			query.setParameter("email", email);
+
+			userExists = query.list().isEmpty();
+
+			if (userExists) {
+				List<Ride> rides = new ArrayList<>();
+				User user = new User(email, name, password, rides);
+				session.persist(user);
+			} else {
+				session.getTransaction().rollback();
+				throw new UserAlreadyExistsException();
+			}
+
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+		return userExists;
+	}
+
+	public List<String> getUsers() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<String> users = session.createQuery("SELECT  email FROM User").list();
+		session.getTransaction().commit();
+		return users;
+	}
+
+
+
+	public List<Ride> getRides(String email) {
+		User u = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Query query = session.createQuery(" FROM User u WHERE u.email = :email ");
+		query.setParameter("email", email);
+		u = (User) query.uniqueResult();
+
+		if (u != null) {
+			Query query2 = session.createQuery("FROM Ride r WHERE r.user = :user ");
+			query2.setParameter("user", u);
+			List<Ride> rides = query2.list();
+			session.getTransaction().commit();
+			return rides;
+		} else {
+			session.getTransaction().rollback();
+			return null;
+		}
 	}
 
 }

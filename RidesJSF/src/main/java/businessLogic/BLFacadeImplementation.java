@@ -105,4 +105,12 @@ public class BLFacadeImplementation implements BLFacade {
 		return b;
 	}
 	
+	public List<String> getUsers(){
+		return dbManager.getUsers();
+	}
+	
+
+	public List<Ride> getRides(String email){
+		return dbManager.getRides(email);
+	}
 }

@@ -63,7 +63,7 @@ public class RegisterBean {
 		if(email!=null && !email.isEmpty() && password!=null && !password.isEmpty() && confirmPassword!=null && !confirmPassword.isEmpty()) {
 			try {
 				facadeBL.register(email, name, confirmPassword);
-				return "home";
+				return "home?faces-redirect=true";
 			} catch (UserAlreadyExistsException e) {
 				 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erabiltzailea existitzen da.", "Errorea.");
 		            FacesContext.getCurrentInstance().addMessage(null, message);
